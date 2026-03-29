@@ -104,3 +104,4 @@ ostream& operator <<(ostream& out, const Array& arr) {
     for (int i = 0; i < arr.size; i++)
         out << arr.ptr[i] << endl;
     return out;
+}
