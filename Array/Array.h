@@ -14,8 +14,7 @@ private:
     int* ptr;
     int size;
     int capacity;
-
-    // Закрытая функция для увеличения емкости 
+ 
     void increaseCapacity(int newCapacity);
 
 public:
