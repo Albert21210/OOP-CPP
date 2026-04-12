@@ -18,13 +18,11 @@ int main() {
 
     cout << "Дискриминант D = " << D << endl;
 
-    double d_val = (double)D;
-
-    if (d_val < 0) {
+    if (D < 0) {
         cout << "Корней нет (D < 0)" << endl;
     }
     else {
-        double sqrt_d = sqrt(d_val);
+        double sqrt_d = sqrt(D);
 
         // Проверяем, является ли корень рациональным
         if (floor(sqrt_d) == sqrt_d) {
@@ -39,7 +37,7 @@ int main() {
             cout << "Корень x2 = " << x2 << endl;
         }
         else {
-            cout << "Корень из дискриминанта иррационален (sqrt(" << d_val << ")). "
+            cout << "Корень из дискриминанта иррационален (sqrt(" << D << ")). "
                 << "Класс Rational не может представить такой результат точно." << endl;
         }
     }
