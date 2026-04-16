@@ -1,24 +1,26 @@
 #pragma once
 #include <iostream>
 
+using namespace std;
+
 class LineListException {};
 
 // Элемент списка
-template <class T> class LineListElem
+template <class T> class LineListElem 
 {
     T data;
     LineListElem* next;
 public:
-    LineListElem(const T& adata,
+    LineListElem(const T& adata, 
         LineListElem* anext) {
         data = adata;
         next = anext;
     }
     const T& getData() const {
-        return data;
+        return data; 
     }
-    LineListElem* getNext() {
-        return next;
+    LineListElem* getNext() { 
+        return next; 
     }
 
     template <class T> friend class LineList;
@@ -78,16 +80,16 @@ public:
     }
 
     // Оператор вывода
-    template <class T> ostream& operator <<
-        (ostream& out, LineList<T>& list) {
+    template <class T> friend ostream& operator<<(ostream& out, const LineList<T>& list) {
         LineListElem<T>* ptr = list.start;
         if (!ptr)
             out << "EMPTY ";
-        else while (ptr)
-        {
-            out << ptr->getData() << " ";
-            ptr = ptr->getNext();
+        else {
+            while (ptr) {
+                out << ptr->getData() << " ";
+                ptr = ptr->getNext();
+            }
         }
+        return out; 
     }
-    return out;
 };
