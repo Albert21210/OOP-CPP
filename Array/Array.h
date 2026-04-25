@@ -1,47 +1,51 @@
 #pragma once
-
 #include <iostream>
 
 using namespace std;
 
+// вместимость по умолчанию
+const int DEFAULT_CAPACITY = 10;
+
 // Исключение для обработки ошибок индексации 
 class ArrayException {};
 
-const int DEFAULT_CAPACITY = 10;
-
 class Array {
 private:
-    int* ptr;
+    // указатель на массив в динамич. памяти
+    int* ptr;   
+    // текущий размер
     int size;
-    int capacity;
- 
+    // вместимость
+    int capacity;  
+
+    // функция для увеличения емкости 
     void increaseCapacity(int newCapacity);
 
 public:
-    // Конструктор с аргументом по умолчанию
+    // конструктор с аргументом по умолчанию
     explicit Array(int startCapacity = DEFAULT_CAPACITY);
 
-    // Деструктор 
+    // деструктор 
     ~Array();
 
-    // Конструктор копирования
+    // конструктор копирования
     Array(const Array& arr);
 
-    // Оператор присваивания 
+    // оператор присваивания 
     Array& operator =(const Array& arr);
 
-    // Операторы индексации 
-    int operator [](int index) const;
-    int& operator [](int index);
+    // оператор индексации 
+    int& operator [](int index); // чтение и запись
 
     // Функции вставки
     void insert(int elem, int index);
+    // вставка элемента в конец массива
     void insert(int elem);
 
-    // Функция удаления 
+    // функция удаления элемента
     void remove(int index);
 
-    // Вспомогательные функции 
+    // другие функции
     int getSize() const;
     friend ostream& operator <<(ostream& out, const Array& arr);
 };
