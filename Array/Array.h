@@ -35,9 +35,9 @@ public:
     Array& operator =(const Array& arr);
 
     // оператор индексации 
-    int& operator [](int index); // чтение и запись
+    int& operator [](int index);
 
-    // Функции вставки
+    // вставка элемента в произвольное место
     void insert(int elem, int index);
     // вставка элемента в конец массива
     void insert(int elem);
