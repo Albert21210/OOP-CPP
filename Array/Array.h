@@ -6,7 +6,7 @@ using namespace std;
 // вместимость по умолчанию
 const int DEFAULT_CAPACITY = 10;
 
-// Исключение для обработки ошибок индексации 
+// исключение для обработки ошибок индексации 
 class ArrayException {};
 
 class Array {
