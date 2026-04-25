@@ -1,111 +1,171 @@
-#include "rational.h"
-#include <cmath> 
+#include <iostream>
+#include "Rational.h"
 
-// Конструктор по умолчанию
-Rational::Rational() {
+using namespace std;
+
+// конструктор по умолчанию
+Rational::Rational()
+{
     numer = 0;
     denom = 1;
 }
 
-// Преобразующий конструктор
-Rational::Rational(int number) {
+// конструктор из целого (преобразующий)
+Rational::Rational(int number)
+{
     numer = number;
     denom = 1;
 }
 
-// Конструктор с параметрами 
-Rational::Rational(int n, int d) {
+// конструктор с двумя аргументами
+Rational::Rational(int n, int d) 
+{
     numer = n;
     denom = d;
 }
 
-// Оператор += 
-Rational& Rational::operator +=(const Rational& r) {
+// оператор присваивания
+Rational& Rational::operator =(const Rational& r)
+{
+    this->numer = r.numer;
+    this->denom = r.denom;
+
+    return *this;
+}
+
+
+// оператор добавления
+Rational& Rational::operator +=(const Rational& r) 
+{
     numer = (numer * r.denom + denom * r.numer);
     denom *= r.denom;
     simplify();
     return *this;
 }
 
-// Функция упрощения дроби
-void Rational::simplify() {
-    if (denom < 0) {
+// оператор умножения
+Rational& Rational::operator *=(const Rational& r)
+{
+    numer = numer * r.numer;
+    denom = denom * r.denom;
+    simplify();
+    return *this;
+}
+
+// функция упрощения
+void Rational::simplify()
+{
+    if (denom < 0)
+    {
         numer = -numer;
         denom = -denom;
     }
-    for (int i = 2; i <= abs(denom) && i <= abs(numer); i++) {
-        if (numer % i == 0 && denom % i == 0) {
+    if (denom == 0)
+    {
+        return;
+    }
+    for (int i = 2; i <= abs(denom) && i <= abs(numer); i++)
+        if (numer % i == 0 && denom % i == 0)
+        {
             numer /= i;
             denom /= i;
             i--;
         }
-    }
 }
 
-// Оператор + (бинарный) 
-Rational Rational::operator +(const Rational& r) const {
+// оператор сложения
+Rational Rational::operator +(const Rational& r) const
+{
     Rational res(*this);
+    // используем готовую операцию добавления
     return res += r;
 }
 
-// Унарный минус
-Rational Rational::operator -() const {
+// оператор отрицания (унарный минус)
+Rational Rational::operator -() const
+{
     Rational r(-numer, denom);
     return r;
 }
 
-Rational Rational::operator -(const Rational& r) const {
-    Rational res(*this);
-    return res += (-r);
+// оператор вычитания
+Rational Rational::operator -(const Rational& r) const
+{
+    return (*this + (-r));
 }
 
-// Оператор -= 
-Rational& Rational::operator -=(const Rational& r) {
+// оператор уменьшения
+Rational& Rational::operator -=(const Rational& r)
+{
     return (*this += (-r));
 }
 
-// Префиксный инкремент 
-Rational& Rational::operator ++() {
+// префикс
+Rational& Rational::operator ++()
+{
     numer += denom;
     return *this;
 }
 
-// Постфиксный инкремент 
-Rational Rational::operator ++(int) {
+// постфикс
+Rational Rational::operator ++(int)
+{
     Rational r(*this);
     numer += denom;
     return r;
 }
 
-// Сравнение на равенство 
-bool Rational::operator ==(const Rational& r) const {
+// операторы сравнения
+bool Rational::operator ==(const Rational& r) const
+{
     return (numer == r.numer) && (denom == r.denom);
 }
 
-// Сравнение на неравенство 
-bool Rational::operator !=(const Rational& r) const {
+bool Rational::operator !=(const Rational& r) const
+{
     return !(*this == r);
 }
 
-// Преобразование в int 
-Rational::operator int() const {
+bool Rational::operator >(const Rational& r) const
+{
+    return (numer * r.denom) > (r.numer * denom);
+}
+
+bool Rational::operator <(const Rational& r) const
+{
+    return (numer * r.denom) < (r.numer * denom);
+}
+
+bool Rational::operator >=(const Rational& r) const
+{
+    return !(*this > r);
+}
+
+bool Rational::operator <=(const Rational& r) const
+{
+    return !(*this < r);
+}
+
+// преобразования типов
+Rational::operator int() const
+{
     return numer / denom;
 }
 
-// Преобразование в double 
-Rational::operator double() const {
+Rational::operator double() const
+{
     return ((double)numer) / denom;
 }
 
-// Оператор ввода 
-istream& operator >>(istream& in, Rational& r) {
+// операторы ввода-вывода
+istream& operator >>(istream& in, Rational& r)
+{
     in >> r.numer >> r.denom;
-    r.simplify();
     return in;
 }
 
-// Оператор вывода
-ostream& operator <<(ostream& out, const Rational& r) {
+ostream& operator <<(ostream& out, const Rational& r)
+{
     out << r.numer << "/" << r.denom;
     return out;
 }
