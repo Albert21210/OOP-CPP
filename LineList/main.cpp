@@ -4,15 +4,15 @@
 using namespace std;
 
 int main(void) {
-    // Тестируем
+    // тестируем
     setlocale(LC_ALL, ".UTF8");
 
-    // Использование класса
+    // использование класса
     LineList<int> list;
 
     cout << "Начало: " << list << endl;
 
-    // Вставка элементов
+    // вставка элементов
     list.insertFirst(10);
     LineListElem<int>* ptr = list.getStart();
 
@@ -22,9 +22,9 @@ int main(void) {
 
     cout << "Шаг 1: " << list << endl;
 
-    // Нахождение суммы
+    // нахождение суммы
     int sum = 0;
-    // Используем переменную-итератор
+    // используем переменную-итератор
     for (LineListElem<int>* it = list.getStart(); it; it = it->getNext()) {
         sum += it->getData();
     }
