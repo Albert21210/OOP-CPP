@@ -1,9 +1,11 @@
 #include "Array.h"
+#include <iostream>
 
 using namespace std;
 
-// Конструктор 
-Array::Array(int startCapacity) {
+// конструктор 
+Array::Array(int startCapacity)
+{
     if (startCapacity <= 0)
         capacity = DEFAULT_CAPACITY;
     else
@@ -12,13 +14,15 @@ Array::Array(int startCapacity) {
     size = 0;
 }
 
-// Деструктор 
-Array::~Array() {
+// деструктор 
+Array::~Array()
+{
     delete[] ptr;
 }
 
-// Конструктор копирования 
-Array::Array(const Array& arr) {
+// конструктор копирования 
+Array::Array(const Array& arr)
+{
     ptr = new int[arr.capacity];
     size = arr.size;
     capacity = arr.capacity;
@@ -26,11 +30,13 @@ Array::Array(const Array& arr) {
         ptr[i] = arr.ptr[i];
 }
 
-// Оператор присваивания
-Array& Array::operator =(const Array& arr) {
+// оператор присваивания
+Array& Array::operator =(const Array& arr)
+{
     if (this == &arr)
         return *this;
-    if (capacity != arr.capacity) {
+    if (capacity != arr.capacity)
+    {
         delete[] ptr;
         ptr = new int[arr.capacity];
         capacity = arr.capacity;
@@ -41,24 +47,18 @@ Array& Array::operator =(const Array& arr) {
     return *this;
 }
 
-// Оператор индексации (чтение и запись)
-int Array::operator [](int index) const {
+// оператор индексации 
+int& Array::operator [](int index)
+{
     if (index >= size || index < 0)
         throw ArrayException();
     else
         return ptr[index];
 }
 
-// Оператор индексации (только чтение)
-int& Array::operator [](int index) {
-    if (index >= size || index < 0)
-        throw ArrayException();
-    else
-        return ptr[index];
-}
-
-// Вставка в произвольное место
-void Array::insert(int elem, int index) {
+// вставка в произвольное место
+void Array::insert(int elem, int index)
+{
     if (index < 0 || index > size)
         throw ArrayException();
     if (size == capacity)
@@ -69,13 +69,15 @@ void Array::insert(int elem, int index) {
     ptr[index] = elem;
 }
 
-// Вставка в конец
-void Array::insert(int elem) {
+// вставка элемента в конец массива
+void Array::insert(int elem)
+{
     insert(elem, size);
 }
 
-// Увеличение емкости
-void Array::increaseCapacity(int newCapacity) {
+// функция для увеличения емкости
+void Array::increaseCapacity(int newCapacity)
+{
     capacity = newCapacity < capacity * 2 ? capacity * 2 : newCapacity;
     int* newPtr = new int[capacity];
     for (int i = 0; i < size; i++)
@@ -84,8 +86,9 @@ void Array::increaseCapacity(int newCapacity) {
     ptr = newPtr;
 }
 
-// Удаление элемента
-void Array::remove(int index) {
+// функция удаления элемента
+void Array::remove(int index)
+{
     if (index < 0 || index >= size)
         throw ArrayException();
     for (int j = index; j < size - 1; j++)
@@ -94,14 +97,17 @@ void Array::remove(int index) {
     size--;
 }
 
-int Array::getSize() const {
+// получение размера массива
+int Array::getSize() const
+{
     return size;
 }
 
-// Вывод в поток 
-ostream& operator <<(ostream& out, const Array& arr) {
+// вывод
+ostream& operator <<(ostream& out, const Array& arr)
+{
     out << "Total size: " << arr.size << endl;
     for (int i = 0; i < arr.size; i++)
-        out << arr.ptr[i] << endl;
+        out << arr.ptr[i] << " ";
     return out;
 }
