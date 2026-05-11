@@ -50,3 +50,12 @@ public:
     double calculate(double x) const;
     std::string getName() const { return "Exponenta"; }
 };
+
+// полином n-й степени
+class Polinom : public Function {
+    vector<double> coeffs; // массив коэффициентов
+public:
+    Polinom(vector<double> c) : coeffs(c) {}
+    double calculate(double x) const;
+    std::string getName() const { return "Polinom"; }
+};
