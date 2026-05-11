@@ -63,3 +63,10 @@ double Parabola::calculate(double x) const {
 double Exponenta::calculate(double x) const {
     return a * exp(b * x);
 }
+
+// полином
+double Polinom::calculate(double x) const {
+    double res = 0;
+    for (size_t i = 0; i < coeffs.size(); i++) res += coeffs[i] * pow(x, (double)i);
+    return res;
+}
