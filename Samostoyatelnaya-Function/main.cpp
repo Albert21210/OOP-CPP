@@ -10,6 +10,7 @@ int main() {
     list.push_back(new Hiperbola(10, 2));      // y = 10/x + 2
     list.push_back(new Parabola(1, -2, 1));    // y = 1 * x ^ 2 - 2 * x + 1
     list.push_back(new Exponenta(1, 0.5));     // y = 1 * e ^ (0.5x)
+    list.push_back(new Polinom({ 1, 2, 1 }));  // y = 1 + 2x + x^2
 
     // тестируем каждую функцию в цикле
     for (Function* f : list) {
