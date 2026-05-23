@@ -16,7 +16,7 @@ bool Labirint::loadFromBMP(const std::string& filename) {
 
     // проверяем сигнатуру BMP-файла (магические байты должны быть 'B' и 'M')
     if (headerBuffer[0] != 'B' || headerBuffer[1] != 'M') {
-        cerr << "Это не BMP файл!" << std::endl;
+        cerr << "Это не BMP файл!" << endl;
         return false;
     }
 
